@@ -1,0 +1,87 @@
+name: Full Production Deploy
+ 
+on:
+  push:
+    branches: [ main ]
+ 
+env:
+  GLOBAL_MESSAGE: "Triggered by main branch"
+ 
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+ 
+    env:
+      JOB_LEVEL_VAR: "deploy-job"
+ 
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+ 
+      - name: Step-level ENV test
+        env:
+          STEP_LEVEL_VAR: "step-message"
+        run: echo "Step Env $STEP_LEVEL_VAR"
+ 
+      - name: Use Repo Variable
+        run: echo "Repo Var ${{ vars.PROJECT_NAME }}"
+ 
+      - name: Use Env Variable
+        run: echo "Env Var ${{ vars.REGION }}"
+ 
+      - name: Use Repo Secret
+        run: echo "Repo Secret is ${{ secrets.API_TOKEN }}"
+ 
+      - name: Use Env Secret
+        run: echo "Env Secret is ${{ secrets.PROD_SECRET_KEY }}"
+ 
+      # Using functions
+      - name: format() example
+        run: echo "${{ format('Deploying {0} to {1}', vars.PROJECT_NAME, vars.REGION) }}"
+ 
+      - name: contains() example
+        run: echo "${{ contains('dev,qa,prod', 'prod') }}"
+ 
+      - name: startsWith() example
+        run: echo "${{ startsWith(github.ref, 'refs/heads/main') }}"
+ 
+      - name: endsWith() example
+        run: echo "${{ endsWith(github.ref, '/main') }}"
+ 
+      - name: join(), fromJson() example
+        run: echo "${{ join(fromJson('["app1","app2"]'), ', ') }}"
+ 
+      - name: toJson() example
+        run: echo '${{ toJson(github.event.head_commit) }}'
+ 
+      - name: hashFiles() example
+        run: echo "${{ hashFiles('src/first.js') }}"
+ 
+      # Simulate failure (optional)
+      - name: Simulate failure
+        run: exit 1
+        continue-on-error: true
+ 
+      # Status check: success()
+      - name: Success status check
+        if: success()
+        run: echo "Success! All steps ran fine."
+ 
+      # Status check: failure()
+      - name: Failure status check
+        if: failure()
+        run: echo "Oops! One or more steps failed."
+ 
+      # Status check: always()
+      - name: Always runs
+        if: always()
+        run: echo "Cleanup or notify always runs."
+ 
+      # Status check: cancelled()
+      - name: Cancelled check
+        if: cancelled()
+        run: echo "Workflow was cancelled."
+ 
+      
+ 
