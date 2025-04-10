@@ -61,7 +61,7 @@ jobs:
       # Simulate failure (optional)
       - name: Simulate failure
         run: exit 1
-        continue-on-error: true
+       
  
       # Status check: success()
       - name: Success status check
