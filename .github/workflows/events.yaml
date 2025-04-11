@@ -19,7 +19,7 @@ on:
           type: string
 jobs:
   task1:
-    uses: ./.github/workflows/workflow_call_example.yaml
+    uses: ./.github/workflows/workflow_call_example.yml
     secrets: 
        Token: ${{ secrets.TOKEN }}
 
