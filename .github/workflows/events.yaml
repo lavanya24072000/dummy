@@ -21,8 +21,8 @@ jobs:
   task1:
     uses: ./.github/workflows/second.yaml
     with: 
-      first: reusable
-      second: caller
+      first: 'reusable'
+      second: 'caller'
 
   
 
