@@ -8,6 +8,7 @@ on:
       environment:
        required: true
        default: production
+       
   
 env:
   GLOBAL_MESSAGE: "Triggered by main branch"
