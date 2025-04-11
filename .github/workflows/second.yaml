@@ -1,18 +1,18 @@
 name: first-workflow
 on:
   workflow_call:
-    inputs:
-      first:
-        required: true
-        type: string
-      second:
-          required : true
-          type : string
+    secrets: 
+      Token:
+        description: 'Give API_TOKEN'
+ 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: build step
-        run: echo "building ${{inputs.first}}and${{inputs.second} job"
-   
+      - name: Checkout
+        uses: actions/checkout@v4.2.2
+        with:
+          token: ${{ secrets.API_TOKEN }}
+      - name: echo message
+        run: echo "This workflow is called workflow calling is caller workflow"
 
