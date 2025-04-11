@@ -1,6 +1,5 @@
 name: first-workflow
 on:
-  push:
   workflow_call:
     inputs:
       first:
