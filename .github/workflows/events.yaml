@@ -19,9 +19,9 @@ on:
           type: string
 jobs:
   task1:
-    uses: ./.github/workflows/second.yaml
-    with: 
-      first: 'reusable'
+    uses: ./.github/workflows/workflow_call.yaml
+    secrets: 
+       Token: ${{ secrets.FIRST }}
      
 
   
