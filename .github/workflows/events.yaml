@@ -17,11 +17,11 @@ on:
       first_word:
           description: give first word to start
           type: string
-# jobs:
-#   task1:
-#     uses: ./.github/workflows/second.yaml
-#     secrets: 
-#        Token: ${{ secrets.API_TOKEN }}
+jobs:
+  task1:
+    uses: ./.github/workflows/second.yaml
+    secrets: 
+       Token: ${{ secrets.TOKEN }}
 
   
 
