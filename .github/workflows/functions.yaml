@@ -3,14 +3,20 @@ name: Full Production Deploy
 on:
   push:
     branches: [ main ]
- 
+  workflow_dispatch:
+    inputs:
+      environment:
+       required: true
+       default: production
+  
 env:
   GLOBAL_MESSAGE: "Triggered by main branch"
  
 jobs:
   deploy:
+    if: github.event_name =='push'
     runs-on: ubuntu-latest
-    environment: production
+    environment: ${{inputs.environment}}
  
     env:
       JOB_LEVEL_VAR: "deploy-job"
@@ -35,8 +41,13 @@ jobs:
  
       - name: Use Env Secret
         run: echo "Env Secret is ${{ secrets.PROD_SECRET_KEY }}"
- 
+  funtions:
+   if: github.event_name =='push'
+   runs-on: ubuntu-latest
+   needs: [deploy]
+   environment: production
       # Using functions
+   steps:
       - name: format() example
         run: echo "${{ format('Deploying {0} to {1}', vars.PROJECT_NAME, vars.REGION) }}"
  
