@@ -2,7 +2,7 @@ name: This describes workflows and events
 run-name: event-types
 on:
   workflow_run:
-        workflows: [' Full Production Deploy']
+        workflows: ['Full Production Deploy']
         types :
             - completed 
   pull_request:
