@@ -21,8 +21,7 @@ jobs:
   task1:
     uses: ./.github/workflows/workflow_call.yaml
     secrets: 
-       Token: ${{ secrets.FIRST }}
-     
+       Token: ${{ secrets.API_TOKEN }}
 
   
 
