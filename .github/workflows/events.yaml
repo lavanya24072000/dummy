@@ -21,9 +21,9 @@ jobs:
   task1:
     runs-on: ubuntu-latest
     steps:
-     - name: call-reusable
-       uses: ./.github/workflows/first-workflow.yaml
-       with: 
+      - name : call-resuable
+        uses: ./.github/workflows/second.yaml
+        with: 
          first: reusable
          second: caller
 
