@@ -1,5 +1,4 @@
 name: Full Production Deploy
- 
 on:
   push:
     branches: [ main ]
